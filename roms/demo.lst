@@ -1,0 +1,29 @@
+; demo.ch8 - ROM de demonstração, escrita para este projeto.
+; Desenha os 16 dígitos hexadecimais da fonte embutida e depois mostra
+; no centro da tela a tecla que for pressionada, com um beep curto.
+; Exercita CLS, LD, ADD, SE, JP, DRW, LD F, LD K e LD ST.
+;
+; endereço  opcode  instrução
+  0x200    00E0    CLS
+  0x202    6200    LD V2, 0x00        ; dígito atual
+  0x204    6002    LD V0, 0x02        ; x
+  0x206    6102    LD V1, 0x02        ; y
+  0x208    F229    LD F, V2           ; I aponta para o glifo de V2
+  0x20A    D015    DRW V0, V1, 5
+  0x20C    7201    ADD V2, 0x01
+  0x20E    7008    ADD V0, 0x08       ; próximo dígito, 8 pixels à direita
+  0x210    3042    SE V0, 0x42        ; fim da linha (8 dígitos)?
+  0x212    1208    JP 0x208           ; não: desenha o próximo
+  0x214    6002    LD V0, 0x02        ; volta ao início da linha
+  0x216    610A    LD V1, 0x0A        ; desce para a segunda linha
+  0x218    3210    SE V2, 0x10        ; os 16 dígitos já foram desenhados?
+  0x21A    1208    JP 0x208           ; não: continua
+  0x21C    F00A    LD V0, K           ; espera uma tecla ser pressionada e solta
+  0x21E    00E0    CLS
+  0x220    631E    LD V3, 0x1E        ; x do dígito da tecla
+  0x222    640D    LD V4, 0x0D        ; y do dígito da tecla
+  0x224    F029    LD F, V0
+  0x226    D345    DRW V3, V4, 5      ; mostra a tecla no centro da tela
+  0x228    6508    LD V5, 0x08
+  0x22A    F518    LD ST, V5          ; beep curto
+  0x22C    121C    JP 0x21C           ; volta a esperar outra tecla
