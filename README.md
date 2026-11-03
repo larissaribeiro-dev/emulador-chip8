@@ -386,10 +386,6 @@ emulador-chip8/
 4. CHIP-8. *Wikipedia*. Disponível em: <https://en.wikipedia.org/wiki/CHIP-8>.
 5. SDL2 Wiki. Disponível em: <https://wiki.libsdl.org/SDL2>.
 
-## Autora
-
-Larissa Rafaela Ribeiro de Souza, estudante de Engenharia da Computação.
-
 ## Licença
 
 Distribuído sob a licença MIT. Veja o arquivo [LICENSE](LICENSE).
